@@ -148,3 +148,10 @@ end
   end
 
 end
+
+if __FILE__ == $PROGRAM_NAME
+  board1 = Board.new
+  bishop1 = Bishop.new(4,4, :black, board1)
+  p bishop1.all_moves
+
+end
