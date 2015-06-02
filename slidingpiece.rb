@@ -1,12 +1,29 @@
 require_relative "piece.rb"
-
+require 'byebug'
 class SlidingPiece < Piece
-  DIAG_DELTAS = []
-  UP_DOWN_DELTAS = []
 
   def moves
-    array = self.move_dirs
+    
+    sub_results = []
+    directions = self.move_dirs
+    directions.each do |direction, delta|
 
+      1.upto(8) do |idx|
+        new_row = (row + (delta[0]*idx))
+        new_col = col + (delta[1]*idx)
+        sub_results << [new_row, new_col]
+      end
+
+    end
+    results = []
+    sub_results.each do |position|
+      current_row = position[0]
+      current_col = position[1]
+      if current_row.between?(0,7) && current_col.between?(0,7) && !(position[0] == row && position[1] == col)
+        results << position
+      end
+    end
+    results
   end
 
 end
