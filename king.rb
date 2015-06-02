@@ -1,9 +1,11 @@
 require_relative "steppingpiece.rb"
 
 class King < SteppingPiece
-  DELTA = [ [1,1], [1,0], [1,-1], [0,1], [0,-1], [-1,0], [-1, 1], [-1,-1] ]
-  def move_dirs
 
+  def move_dirs
+    {:upright => [-1,1], :upleft => [-1, -1], :downleft => [1, -1],
+      :downright => [1, 1], :down => [1,0], :up => [-1, 0],
+      :left => [0, -1], :right => [0, 1]}
   end
 
 end
