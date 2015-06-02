@@ -28,13 +28,35 @@ def initialize
   @grid = Array.new(8) {Array.new(8)}
 end
 
-  def [](input)
-    input = input.to_s unless input.is_a?(String)
-    array = input.split("")
-    row = array[0].ord - 97
-    col = (array[1].to_i - 1)
-    @grid[row][col]
+  def display
+    results = []
+
+    grid.each do |row|
+      sub_results = []
+
+      row.each do |piece|
+        if piece.class == NilClass
+          sub_results << nil
+        else
+        sub_results << piece.class
+        end
+      end
+
+      results << sub_results
+    end
+
+    results.each do |row|
+      puts row
+    end
   end
+
+  # def [](input)
+  #   input = input.to_s unless input.is_a?(String)
+  #   array = input.split("")
+  #   row = array[0].ord - 97
+  #   col = (array[1].to_i - 1)
+  #   @grid[row][col]
+  # end
 
   def populate_board
     populate_pawns
@@ -51,9 +73,9 @@ end
     PAWNS.each_with_index do |color_array, index|
       color_array.each do |pos|
         if index == 0
-          grid[pos[0], pos[1]] = Pawn.new(pos[0], pos[1], :black, self)
+          grid[pos[0]][pos[1]] = Pawn.new(pos[0], pos[1], :black, self)
         else
-          grid[pos[0], pos[1]] = Pawn.new(pos[0], pos[1], :white, self)
+          grid[pos[0]][pos[1]] = Pawn.new(pos[0], pos[1], :white, self)
         end
       end
     end
@@ -64,9 +86,9 @@ end
     ROOKS.each_with_index do |color_array, index|
       color_array.each do |pos|
         if index == 0
-          grid[pos[0], pos[1]] = Rook.new(pos[0], pos[1], :black, self)
+          grid[pos[0]][pos[1]] = Rook.new(pos[0], pos[1], :black, self)
         else
-          grid[pos[0], pos[1]] = Rook.new(pos[0], pos[1], :white, self)
+          grid[pos[0]][pos[1]] = Rook.new(pos[0], pos[1], :white, self)
         end
       end
     end
@@ -77,9 +99,9 @@ end
     KNIGHTS.each_with_index do |color_array, index|
       color_array.each do |pos|
         if index == 0
-          grid[pos[0], pos[1]] = Knight.new(pos[0], pos[1], :black, self)
+          grid[pos[0]][pos[1]] = Knight.new(pos[0], pos[1], :black, self)
         else
-          grid[pos[0], pos[1]] = Knight.new(pos[0], pos[1], :white, self)
+          grid[pos[0]][pos[1]] = Knight.new(pos[0], pos[1], :white, self)
         end
       end
     end
@@ -90,9 +112,9 @@ end
     BISHOPS.each_with_index do |color_array, index|
       color_array.each do |pos|
         if index == 0
-          grid[pos[0], pos[1]] = Bishop.new(pos[0], pos[1], :black, self)
+          grid[pos[0]][pos[1]] = Bishop.new(pos[0], pos[1], :black, self)
         else
-          grid[pos[0], pos[1]] = Bishop.new(pos[0], pos[1], :white, self)
+          grid[pos[0]][pos[1]] = Bishop.new(pos[0], pos[1], :white, self)
         end
       end
     end
@@ -103,9 +125,9 @@ end
     QUEENS.each_with_index do |color_array, index|
       color_array.each do |pos|
         if index == 0
-          grid[pos[0], pos[1]] = Queen.new(pos[0], pos[1], :black, self)
+          grid[pos[0]][pos[1]] = Queen.new(pos[0], pos[1], :black, self)
         else
-          grid[pos[0], pos[1]] = Queen.new(pos[0], pos[1], :white, self)
+          grid[pos[0]][pos[1]] = Queen.new(pos[0], pos[1], :white, self)
         end
       end
     end
@@ -116,9 +138,9 @@ end
     KINGS.each_with_index do |color_array, index|
       color_array.each do |pos|
         if index == 0
-          grid[pos[0], pos[1]] = King.new(pos[0], pos[1], :black, self)
+          grid[pos[0]][pos[1]] = King.new(pos[0], pos[1], :black, self)
         else
-          grid[pos[0], pos[1]] = King.new(pos[0], pos[1], :white, self)
+          grid[pos[0]][pos[1]] = King.new(pos[0], pos[1], :white, self)
         end
       end
     end
