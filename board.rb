@@ -151,7 +151,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   board1 = Board.new
-  bishop1 = Bishop.new(4,4, :black, board1)
-  p bishop1.all_moves
+  king = King.new(4,4, :black, board1)
+  p king.all_moves
 
 end

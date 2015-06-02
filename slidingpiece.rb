@@ -32,24 +32,9 @@ class SlidingPiece < Piece
 
 
 
-  # def move_filter(moves)
-  #   results = []
-  #   moves.each do |key, positions|
-  #     positions.each do |position|
-  #     current_row = position[0]
-  #     current_col = position[1]
-  #     inside_board = current_row.between?(0,7) && current_col.between?(0,7)
-  #     not_original_position = !(position[0] == row && position[1] == col)
-  #
-  #       results << position if inside_board && not_original_position
-  #     end
-  #   end
-  #   results
-  #
-  # end
 
   def moves
-    move_filter(self.all_moves)
+  
 
   end
 
