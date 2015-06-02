@@ -4,7 +4,7 @@ class SteppingPiece < Piece
 
 
   def moves
-    array = self.move_dirs
+    deltas = self.move_dirs
 
   end
 
