@@ -2,7 +2,7 @@ require_relative "piece.rb"
 require 'byebug'
 class SlidingPiece < Piece
 
-  def all_moves
+  def moves
 
     results = Hash.new([])
     directions = self.move_dirs
@@ -18,12 +18,6 @@ class SlidingPiece < Piece
 
     end
     results
-  end
-
-
-  def moves
-
-
   end
 
 end

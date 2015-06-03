@@ -3,7 +3,7 @@ require_relative "piece.rb"
 class SteppingPiece < Piece
 
 
-  def all_moves
+  def moves
 
     results = Hash.new([])
 
@@ -12,21 +12,14 @@ class SteppingPiece < Piece
 
         new_row = (row + (delta[0]))
         new_col = col + (delta[1])
-        results[direction] += [[new_row, new_col]] if in_bounds?(new_row, new_col)
+         unless friend_occupied?(new_row, new_col)
+          results[direction] += [[new_row, new_col]] if in_bounds?(new_row, new_col)
+         end
       end
 
 
     results
   end
 
-  def in_bounds?(new_row, new_col)
-    inside_board = new_row.between?(0,7) && new_col.between?(0,7)
-    not_original_position = !(new_row == row && new_col == col)
-    return false unless inside_board && not_original_position
-    true
-  end
 
-  def moves
-
-  end
 end
