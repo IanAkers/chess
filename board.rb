@@ -61,6 +61,8 @@ def []= (new_row, new_col, piece)
   piece.row, piece.col = new_row, new_col
 end
 
+
+
 def move(start_pos, end_pos)
   if self[start_pos[0], start_pos[1]].nil?
     puts "Please select a valid start position"
@@ -68,17 +70,31 @@ def move(start_pos, end_pos)
   end
 
   piece = self[start_pos[0], start_pos[1]]
-  if !(piece.moves.values.include?([end_pos]))
+  unless moves_splitter(piece.moves).include?(end_pos)
     puts "Not a valid move"
     return nil
   end
-debugger
+
   #move_into_check?
     unless move_into_check?(start_pos, end_pos)
       self[end_pos[0], end_pos[1]] = piece
       destroy_at(start_pos[0], start_pos[1])
     end
   end
+
+  def moves_splitter(moves)
+    output = []
+    moves.each do |direction|
+      direction.each do |position|
+        output << position
+      end
+    end
+    output
+  end
+
+
+
+
 
 
   def move_into_check?(start_pos, end_pos)
@@ -91,6 +107,11 @@ debugger
 
     new_board.in_check?(current_player)
   end
+
+
+
+
+
 
   def dup
 
@@ -106,30 +127,40 @@ debugger
     new_board
   end
 
+
+
+
+
 def destroy_at(new_row, new_col)
   grid[new_row][new_col] = nil
 end
+
+
+
+
 
 def in_check?(color)
 
   king_position = find_king_position(color)
 
-  moves_array = []
+
   grid.each_with_index do |row, row_index|
     row.each_with_index do |col, col_index|
 
       unless grid[row_index][col_index].nil?
+        debugger
         piece = grid[row_index][col_index]
-         piece.moves.values.each do |value|
-           moves_array += value
-         end
+         return false if moves_splitter(piece.moves).include?(king_position)
+
       end
     end
-
-    end
-    debugger
-    moves_array.include?(king_position)
   end
+
+    true
+end
+
+
+
 
 
 def find_king_position(color)
@@ -146,6 +177,7 @@ def find_king_position(color)
 
 
 end
+
 
   # def [](input)
   #   input = input.to_s unless input.is_a?(String)
@@ -184,8 +216,14 @@ end
 if __FILE__ == $PROGRAM_NAME
   board1 = Board.new
   board1.populate_board
-  pawn1 = board1[1,0]
-  p pawn1.moves
+  queen = Queen.new(2,2, :white, board1)
+  board1[2,2] = queen
+  board1.move([1,3],[3,3])
+  p queen.moves
+  p board1.in_check?(:black)
+
+
+  p board1.display
 
 
 
