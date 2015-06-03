@@ -59,12 +59,17 @@ def []= (new_row, new_col, piece)
   old_row = piece.row
   old_col = piece.col
   piece.row, piece.col = new_row, new_col
-
-  if old_row != piece.row && old_col != piece.col
-    grid[old_row][old_col] = nil
-  end
 end
 
+def move(start_pos, end_pos)
+  piece = self[start_pos[0], start_pos[1]]
+  self[end_pos[0], end_pos[1]] = piece
+  destroy_at(start_pos[0], start_pos[1])
+end
+
+def destroy_at(new_row, new_col)
+  grid[new_row][new_col] = nil
+end
 
 def in_check?(color)
 
@@ -138,6 +143,7 @@ end
 if __FILE__ == $PROGRAM_NAME
   board1 = Board.new
   board1.populate_board
-  rook = board1[0,0]
-  p board1.in_check?(:black)
+
+    p board1.move([1,0], [3,0])
+    p board1.display
 end

@@ -37,6 +37,13 @@ class Piece
 
   end
 
+  def destroy
+
+    board.grid[row][col] = nil
+
+  end
+
+
   def move
   end
 
