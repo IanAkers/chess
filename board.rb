@@ -66,14 +66,39 @@ def move(start_pos, end_pos)
     puts "Please select a valid start position"
     return nil
   end
+
   piece = self[start_pos[0], start_pos[1]]
-  if piece.moves.values.include?(end_pos)
+  if !(piece.moves.values.include?(end_pos))
+    puts "Not a valid move"
+    return nil
+  end
+
+  #move_into_check?
+
     self[end_pos[0], end_pos[1]] = piece
     destroy_at(start_pos[0], start_pos[1])
-  else
-    puts "Not a valid move"
+
   end
-end
+
+
+  def move_into_check?(start_pos, end_pos)
+
+
+  end
+
+  def dup
+
+    new_board = Board.new
+    grid.each do |old_row|
+      old_row.each do |old_piece|
+        unless old_piece.nil?
+          old_piece.dup(new_board)
+        end
+      end
+    end
+
+    new_board
+  end
 
 def destroy_at(new_row, new_col)
   grid[new_row][new_col] = nil
