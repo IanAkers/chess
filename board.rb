@@ -50,6 +50,10 @@ end
     end
   end
 
+def [](new_row, new_col)
+
+  grid[new_row][new_col]
+end
   # def [](input)
   #   input = input.to_s unless input.is_a?(String)
   #   array = input.split("")

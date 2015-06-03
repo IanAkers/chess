@@ -13,7 +13,7 @@ class SlidingPiece < Piece
         new_col = col + (delta[1]*idx)
 
         results[direction] += [[new_row, new_col]] if in_bounds?(new_row, new_col)
-        
+
       end
 
     end
@@ -27,11 +27,27 @@ class SlidingPiece < Piece
     true
   end
 
+  def enemy_occupied?(new_row, new_col)
+    occupied = !board[new_row, new_col].nil?
+    if occupied
+      target_color = board[new_row, new_col].color
+      enemy = (target_color != self.color)
+    end
+    return true if occupied && enemy
+    false
 
+  end
 
+  def friend_occupied?(new_row, new_col)
+    occupied = !board[new_row, new_col].nil?
+    if occupied
+      target_color = board[new_row, new_col].color
+      friend = (target_color == self.color)
+    end
+    return true if occupied && friend
+    false
 
-
-
+  end
 
 
   def moves
