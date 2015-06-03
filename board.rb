@@ -54,7 +54,11 @@ def [](new_row, new_col)
   grid[new_row][new_col]
 end
 
+def []= (new_row, new_col, piece)
+  grid[new_row][new_col] = piece
+  piece.row, piece.col = new_row, new_col
 
+end
 
 
   # def [](input)

@@ -37,7 +37,7 @@ class Piece
 
   end
 
-  def moves
+  def move
   end
 
 end
