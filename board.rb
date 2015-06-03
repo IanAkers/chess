@@ -66,6 +66,41 @@ def []= (new_row, new_col, piece)
 end
 
 
+def in_check?(color)
+
+  king_position = find_king_position(color)
+
+  moves_array = []
+  grid.each_with_index do |row, row_index|
+    row.each_with_index do |col, col_index|
+
+      unless grid[row_index][col_index].nil?
+        piece = grid[row_index][col_index]
+        moves_array += piece.moves.values
+      end
+    end
+
+    end
+    debugger
+    moves_array.include?(king_position)
+  end
+
+
+def find_king_position(color)
+  king_position = []
+  grid.each_with_index do |row, row_index|
+    row.each_with_index do |col, col_index|
+      if grid[row_index][col_index].is_a?(King) && grid[row_index][col_index].color == color
+        king_position = [row_index, col_index]
+      end
+    end
+  end
+
+  king_position
+
+
+end
+
   # def [](input)
   #   input = input.to_s unless input.is_a?(String)
   #   array = input.split("")
@@ -103,6 +138,6 @@ end
 if __FILE__ == $PROGRAM_NAME
   board1 = Board.new
   board1.populate_board
-  p board1.display
-
+  rook = board1[0,0]
+  p board1.in_check?(:black)
 end

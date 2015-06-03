@@ -16,7 +16,7 @@ class Piece
   end
 
   def enemy_occupied?(new_row, new_col)
-    occupied = !board[new_row, new_col].nil?
+    occupied = !(board[new_row, new_col].nil?)
     if occupied
       target_color = board[new_row, new_col].color
       enemy = (target_color != self.color)
@@ -27,7 +27,7 @@ class Piece
   end
 
   def friend_occupied?(new_row, new_col)
-    occupied = !board[new_row, new_col].nil?
+    occupied = !(board[new_row, new_col].nil?)
     if occupied
       target_color = board[new_row, new_col].color
       friend = (target_color == self.color)

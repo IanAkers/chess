@@ -27,6 +27,7 @@ def moves
   directions.each do |direction, delta|
     new_row = row + (delta[0])
     new_col = col + (delta[1])
+    next if !(in_bounds?(new_row, new_col))
 
     unless friend_occupied?(new_row, new_col)
 
