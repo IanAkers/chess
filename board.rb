@@ -62,9 +62,17 @@ def []= (new_row, new_col, piece)
 end
 
 def move(start_pos, end_pos)
+  if self[start_pos[0], start_pos[1]].nil?
+    puts "Please select a valid start position"
+    return nil
+  end
   piece = self[start_pos[0], start_pos[1]]
-  self[end_pos[0], end_pos[1]] = piece
-  destroy_at(start_pos[0], start_pos[1])
+  if piece.moves.values.include?(end_pos)
+    self[end_pos[0], end_pos[1]] = piece
+    destroy_at(start_pos[0], start_pos[1])
+  else
+    puts "Not a valid move"
+  end
 end
 
 def destroy_at(new_row, new_col)
