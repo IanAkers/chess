@@ -44,14 +44,13 @@ class Piece
   end
 
   def dup(new_board)
-    
+
     new_piece = self.class.new(row, col, color, new_board)
     new_board.grid[row][col] = new_piece
     new_piece
 
   end
 
-  def move
-  end
+
 
 end

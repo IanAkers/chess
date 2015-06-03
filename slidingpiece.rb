@@ -13,7 +13,7 @@ class SlidingPiece < Piece
         new_col = col + (delta[1]*idx)
         next unless in_bounds?(new_row, new_col)
         break if friend_occupied?(new_row, new_col)
-        results[direction] += [new_row, new_col]
+        results[direction] += [[new_row, new_col]]
         break if enemy_occupied?(new_row, new_col)
       end
 

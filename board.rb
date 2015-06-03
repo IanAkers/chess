@@ -68,22 +68,28 @@ def move(start_pos, end_pos)
   end
 
   piece = self[start_pos[0], start_pos[1]]
-  if !(piece.moves.values.include?(end_pos))
+  if !(piece.moves.values.include?([end_pos]))
     puts "Not a valid move"
     return nil
   end
-
+debugger
   #move_into_check?
-
-    self[end_pos[0], end_pos[1]] = piece
-    destroy_at(start_pos[0], start_pos[1])
-
+    unless move_into_check?(start_pos, end_pos)
+      self[end_pos[0], end_pos[1]] = piece
+      destroy_at(start_pos[0], start_pos[1])
+    end
   end
 
 
   def move_into_check?(start_pos, end_pos)
+    new_board = self.dup
+    piece = new_board[start_pos[0], start_pos[1]]
+    new_board[end_pos[0], end_pos[1]] = piece
+    new_board.destroy_at(start_pos[0], start_pos[1])
 
+    current_player = self[start_pos[0],start_pos[1]].color
 
+    new_board.in_check?(current_player)
   end
 
   def dup
@@ -114,7 +120,9 @@ def in_check?(color)
 
       unless grid[row_index][col_index].nil?
         piece = grid[row_index][col_index]
-        moves_array += piece.moves.values
+         piece.moves.values.each do |value|
+           moves_array += value
+         end
       end
     end
 
@@ -176,7 +184,12 @@ end
 if __FILE__ == $PROGRAM_NAME
   board1 = Board.new
   board1.populate_board
+  queen = Queen.new(2,2,:white,board1)
+  p board1[1,3].moves
+  board1.move([1,3],[3,3])
+  p queen.moves
+  p board1.move_into_check?([1,3],[3,3])
 
-    p board1.move([1,0], [3,0])
-    p board1.display
+
+
 end
