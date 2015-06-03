@@ -51,7 +51,6 @@ end
   end
 
 def [](new_row, new_col)
-
   grid[new_row][new_col]
 end
   # def [](input)
