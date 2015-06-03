@@ -59,99 +59,34 @@ end
   # end
 
   def populate_board
-    populate_pawns
-    populate_rooks
-    populate_knights
-    populate_bishops
-    populate_kings
-    populate_queens
+    populate(PAWNS,Pawn)
+    populate(ROOKS,Rook)
+    populate(KNIGHTS, Knight)
+    populate(BISHOPS, Bishop)
+    populate(KINGS, King)
+    populate(QUEENS, Queen)
     self
   end
 
 
-  def populate_pawns
-    PAWNS.each_with_index do |color_array, index|
+  def populate(constant, class_var)
+    constant.each_with_index do |color_array, index|
       color_array.each do |pos|
         if index == 0
-          grid[pos[0]][pos[1]] = Pawn.new(pos[0], pos[1], :black, self)
+          grid[pos[0]][pos[1]] = class_var.new(pos[0], pos[1], :black, self)
         else
-          grid[pos[0]][pos[1]] = Pawn.new(pos[0], pos[1], :white, self)
+          grid[pos[0]][pos[1]] = class_var.new(pos[0], pos[1], :white, self)
         end
       end
     end
-
   end
 
-  def populate_rooks
-    ROOKS.each_with_index do |color_array, index|
-      color_array.each do |pos|
-        if index == 0
-          grid[pos[0]][pos[1]] = Rook.new(pos[0], pos[1], :black, self)
-        else
-          grid[pos[0]][pos[1]] = Rook.new(pos[0], pos[1], :white, self)
-        end
-      end
-    end
-
-  end
-
-  def populate_knights
-    KNIGHTS.each_with_index do |color_array, index|
-      color_array.each do |pos|
-        if index == 0
-          grid[pos[0]][pos[1]] = Knight.new(pos[0], pos[1], :black, self)
-        else
-          grid[pos[0]][pos[1]] = Knight.new(pos[0], pos[1], :white, self)
-        end
-      end
-    end
-
-  end
-
-  def populate_bishops
-    BISHOPS.each_with_index do |color_array, index|
-      color_array.each do |pos|
-        if index == 0
-          grid[pos[0]][pos[1]] = Bishop.new(pos[0], pos[1], :black, self)
-        else
-          grid[pos[0]][pos[1]] = Bishop.new(pos[0], pos[1], :white, self)
-        end
-      end
-    end
-
-  end
-
-  def populate_queens
-    QUEENS.each_with_index do |color_array, index|
-      color_array.each do |pos|
-        if index == 0
-          grid[pos[0]][pos[1]] = Queen.new(pos[0], pos[1], :black, self)
-        else
-          grid[pos[0]][pos[1]] = Queen.new(pos[0], pos[1], :white, self)
-        end
-      end
-    end
-
-  end
-
-  def populate_kings
-    KINGS.each_with_index do |color_array, index|
-      color_array.each do |pos|
-        if index == 0
-          grid[pos[0]][pos[1]] = King.new(pos[0], pos[1], :black, self)
-        else
-          grid[pos[0]][pos[1]] = King.new(pos[0], pos[1], :white, self)
-        end
-      end
-    end
-
-  end
 
 end
 
 if __FILE__ == $PROGRAM_NAME
   board1 = Board.new
-  king = King.new(4,4, :black, board1)
-  p king.all_moves
+  board1.populate_board
+  p board1.display
 
 end

@@ -13,6 +13,7 @@ class SlidingPiece < Piece
         new_col = col + (delta[1]*idx)
 
         results[direction] += [[new_row, new_col]] if in_bounds?(new_row, new_col)
+        
       end
 
     end
@@ -34,7 +35,7 @@ class SlidingPiece < Piece
 
 
   def moves
-  
+
 
   end
 
