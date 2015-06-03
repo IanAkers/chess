@@ -5,7 +5,7 @@ class SteppingPiece < Piece
 
   def moves
 
-    results = Hash.new([])
+    results = Hash.new()
 
     directions = self.move_dirs
     directions.each do |direction, delta|
@@ -14,7 +14,7 @@ class SteppingPiece < Piece
         new_col = col + (delta[1])
         next if !(in_bounds?(new_row, new_col))
          unless friend_occupied?(new_row, new_col)
-          results[direction] += [[new_row, new_col]]
+          results[direction] += [new_row, new_col]
          end
       end
 

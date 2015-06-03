@@ -186,9 +186,9 @@ if __FILE__ == $PROGRAM_NAME
   board1.populate_board
   queen = Queen.new(2,2,:white,board1)
   p board1[1,3].moves
-  board1.move([1,3],[3,3])
   p queen.moves
-  p board1.move_into_check?([1,3],[3,3])
+
+  p board1[0,1].moves
 
 
 
