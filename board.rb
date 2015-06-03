@@ -184,9 +184,8 @@ end
 if __FILE__ == $PROGRAM_NAME
   board1 = Board.new
   board1.populate_board
-  queen = Queen.new(2,2,:white,board1)
-
-  p queen.moves
+  pawn1 = board1[1,0]
+  p pawn1.moves
 
 
 
