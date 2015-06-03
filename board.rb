@@ -56,8 +56,13 @@ end
 
 def []= (new_row, new_col, piece)
   grid[new_row][new_col] = piece
+  old_row = piece.row
+  old_col = piece.col
   piece.row, piece.col = new_row, new_col
 
+  if old_row != piece.row && old_col != piece.col
+    grid[old_row][old_col] = nil
+  end
 end
 
 
@@ -84,9 +89,9 @@ end
     constant.each_with_index do |color_array, index|
       color_array.each do |pos|
         if index == 0
-          grid[pos[0]][pos[1]] = class_var.new(pos[0], pos[1], :black, self)
+          self[pos[0],pos[1]] = class_var.new(pos[0], pos[1], :black, self)
         else
-          grid[pos[0]][pos[1]] = class_var.new(pos[0], pos[1], :white, self)
+          self[pos[0],pos[1]] = class_var.new(pos[0], pos[1], :white, self)
         end
       end
     end
